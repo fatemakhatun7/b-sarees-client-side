@@ -68,10 +68,23 @@ const SignUp = () => {
                         })} className="input input-bordered w-full max-w-xs" />
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
+                    <h1 className='mt-5 font-bold text-lg mb-3'>Join us as-</h1>
+                    <div className='flex'>
+                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
+                        <div className='text-lg font-semibold'>
+                        seller
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
+                        <div className='text-lg font-semibold'>
+                        user
+                        </div>
+                    </div>
                     <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
                     {error && <p className='text-red-600'>{error}</p>}
                 </form>
-                <p className='mt-3'>Already have an account <Link className='font-bold text-green-600 hover:btn-link' to="/login">Please Login</Link></p>
+                <p className='mt-3'>Already have an account? <Link className='font-bold text-green-600 hover:btn-link' to="/login">Please Login</Link></p>
                 <div className="divider">OR</div>
                 <button onClick={handleGoogleSignin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
 

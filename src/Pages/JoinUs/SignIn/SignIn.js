@@ -63,6 +63,19 @@ const SignIn = () => {
                         <label className="label"> <span className="label-text hover:btn-link">Forget Password?</span></label>
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
+                    <h1 className='font-bold text-lg'>Join us as-</h1>
+                    <div className='flex'>
+                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
+                        <div className='text-lg font-semibold'>
+                        seller
+                        </div>
+                    </div>
+                    <div className='flex mb-5'>
+                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
+                        <div className='text-lg font-semibold'>
+                        user
+                        </div>
+                    </div>
                     <input className='btn btn-accent w-full' value="Login" type="submit" />
                     <div>
                         {loginError && <p className='text-red-600'>{loginError}</p>}
