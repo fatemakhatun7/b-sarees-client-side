@@ -17,7 +17,7 @@ const SliderItems = ({slide}) => {
                         Pre-owned Saree House <br />
                         For girls.<br/>
                         <span className='text-sm font bold'>
-                            you can sell and buy sarees here.
+                            you can sell and buy used sarees here.
                         </span><br />
                     </h1>
                 </div>

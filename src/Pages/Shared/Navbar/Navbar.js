@@ -34,7 +34,7 @@ const Navbar = () => {
                     <>
                         <button className="dropdown dropdown-end">
                             <button tabIndex={0} className="btn btn-outline btn-success btn-sm">
-                                Get Started
+                                Join Us
                             </button>
                             <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                                 <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/signin'>Sign In</Link></li>
