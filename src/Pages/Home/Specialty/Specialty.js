@@ -3,7 +3,7 @@ import img4 from '../../../assets/images/img-4.jpg';
 
 const Specialty = () => {
     return (
-        <div className='mx-5 mt-5 mb-10 border-l-8 border-lime-500'>
+        <div className='mx-5 my-20 border-l-8 border-lime-500'>
             <div className='flex p-3 justify-around'>
                 <div className='text-center'>
                     <p className='font-bold text-lg'>Specialty</p>
