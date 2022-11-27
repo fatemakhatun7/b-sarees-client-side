@@ -6,7 +6,7 @@ import { AuthContext } from '../../../Contexts/Authprovider';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
     const [error, setError] = useState('')
     const handleSignUp = (data) => {
         console.log(data);
@@ -28,6 +28,13 @@ const SignUp = () => {
                 setError(error.message)
             });
     }
+
+    const handleGoogleSignin = () => {
+        signInWithGoogle().then(result => {
+          console.log(result.user);
+          toast.success('You have successfully created your account.');
+        })
+      }
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -66,7 +73,7 @@ const SignUp = () => {
                 </form>
                 <p className='mt-3'>Already have an account <Link className='font-bold text-green-600 hover:btn-link' to="/login">Please Login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
 
             </div>
         </div>
