@@ -37,7 +37,7 @@ const Navbar = () => {
                                 Join Us
                             </button>
                             <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                                <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/signin'>Sign In</Link></li>
+                                <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/login'>Sign In</Link></li>
                                 <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/signup'>Sign Up</Link></li>
                             </ul>
                         </button>
