@@ -40,7 +40,7 @@ const SignUp = () => {
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7 bg-lime-200 rounded-lg'>
             <div className="avatar flex justify-center mb-3">
-                    <div className="w-10 sm:w-32 rounded-full">
+                    <div className="w-32 rounded-full">
                         <img src="https://i.ibb.co/KwDX2w0/signup.jpg" alt='used sarees'/>
                     </div>
                 </div>
