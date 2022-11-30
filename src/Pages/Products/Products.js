@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, Outlet } from 'react-router-dom';
+import Loader from '../Shared/Loader/Loader';
 
 const Products = () => {
     
-    const { data: categories = [] } = useQuery({
+    const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/categories');
@@ -12,11 +13,10 @@ const Products = () => {
         }
     });
     
-    console.log(categories);
+    if(isLoading){
+        return <Loader></Loader>
+    }
 
-    /* if(isLoading){
-        return <Loading></Loading>
-    } */
     
     return (
         <div>
@@ -29,13 +29,17 @@ const Products = () => {
                             <img src={product.img} alt="saree" className="rounded-xl h-44 hover:scale-125 transition-all duration-500 cursor-pointer" />
                         </figure>
                         <div className="card-body items-center text-center">
-                            <h2 className="card-title">{product.name}</h2>
+                            <h2 className="card-title">{product.cate_name}</h2>
                         </div>
                         <div className='text-center mb-3'>
                             <Link className="btn">See more</Link>
                         </div>
                     </div>  )
                 }
+            </div>
+            <div className='text-center mb-3'>
+                <h2 className='text-2xl font-bold mb-2'>Do you want to add more products?</h2>
+                <Link to='/addProduct' className="btn">Add Product</Link>
             </div>
             <Outlet></Outlet>
         </div>

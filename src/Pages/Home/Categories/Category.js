@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Category = ({cate}) => {
-    const {name, Description , img} = cate;
+    const {cate_name, Description , img} = cate;
     console.log(cate);
 
     return (
@@ -11,7 +11,7 @@ const Category = ({cate}) => {
                 <img src={img} alt="Shoes" className="rounded-xl h-44 hover:scale-125 transition-all duration-500 cursor-pointer" />
             </figure>
             <div className="card-body items-center text-center">
-                <h2 className="card-title">{name}</h2>
+                <h2 className="card-title">{cate_name}</h2>
                 <p>{Description}</p>
             </div>
             <div className='text-center mb-3'>
