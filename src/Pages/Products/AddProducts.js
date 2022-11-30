@@ -20,8 +20,19 @@ const AddProducts = () => {
 
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(addProduct);
+        // console.log(addProduct);
 
+        fetch('http://localhost:5000/addProducts', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addProduct)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
         
     }
 
