@@ -1,13 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Form } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
+import Loader from '../Shared/Loader/Loader';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext);
     const [addProduct, setAddProduct] = useState({});
 
-    const { data: categories = [] } = useQuery({
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
+
+    const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/categories');
@@ -16,32 +20,54 @@ const AddProducts = () => {
         }
     });
 
-
-
     const handleSubmit = e =>{
         e.preventDefault();
-        // console.log(addProduct);
+        console.log(addProduct);
 
-        fetch('http://localhost:5000/addProducts', {
+        const image = addProduct.product_image[0];
+        // console.log(image)
+        const formData = new FormData();
+        formData.append('image',image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(imgData =>{
+            // console.log(imgData.data.url)
+            const productInfo = {
+                seller_name: addProduct.seller_name,
+                product_name: addProduct.product_name, 
+                email: addProduct.email,
+                product_image: imgData.data.url,
+                location: addProduct.location,
+                resale_price: addProduct.resale_price,
+                original_price: addProduct.original_price,
+                usage: addProduct.usage,
+                contact: addProduct.contact
+            }
+            
+            fetch('http://localhost:5000/addProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(addProduct)
+            body: JSON.stringify(productInfo)
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            if(data.acknowledged){
+                toast.success('Successfully added your product.');
+                e.target.reset();
+            }
         })
-        
+
+        }) 
     }
 
-    const handleInputBlur = event =>{
-        const field = event.target.name;
-        const value = event.target.value;
-        const newProduct = {...addProduct}
-        newProduct[field] = value;
-        setAddProduct(newProduct);
+    if(isLoading){
+        return <Loader></Loader>
     }
 
     return (
@@ -57,25 +83,19 @@ const AddProducts = () => {
                             <label className="label">
                                 <span className="label-text">Your name</span>
                             </label>
-                            <input onBlur={handleInputBlur} type="text" name="seller_name" placeholder="Your name" className="input input-bordered input-info max-w-xs mb-2" required/>
-                        </div>
-                        <div className='form-control'>
-                            <label className="label">
-                                <span className="label-text">Your photo</span>
-                            </label>
-                            <input onBlur={handleInputBlur} type="file" name="seller_photo" placeholder="Your photo" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="text" name="seller_name" onBlur={(e)=>setAddProduct({...addProduct,seller_name : e.target.value})} placeholder="Your name" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
                                  <span className="label-text">Email</span>
                             </label>
-                            <input onBlur={handleInputBlur} type="email" name="email" placeholder="Your email" value={user.email} className="input input-bordered input-info max-w-xs mb-2" readOnly/>
+                            <input type="email" name="email" onBlur={(e)=>setAddProduct({...addProduct,email : e.target.value})} placeholder="Your email" value={user.email} className="input input-bordered input-info max-w-xs mb-2" readOnly/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
                                  <span className="label-text">Category Name</span>
                             </label>
-                            <select onBlur={handleInputBlur} name="product_name" className="select select-info w-full max-w-xs">
+                            <select name="product_name" onBlur={(e)=>setAddProduct({...addProduct,product_name : e.target.value})} className="select select-info w-full max-w-xs">
                                 <option disabled selected>Select a category</option>
                                 {
                                     categories.map(category=>
@@ -88,7 +108,7 @@ const AddProducts = () => {
                             <label className="label">
                                  <span className="label-text">Product image</span>
                             </label>
-                            <input onBlur={handleInputBlur} type="file" name="product_image" placeholder="product image"  className="input input-bordered input-info max-w-xs mb-2"/>
+                            <input type="file" name="product_image" onBlur={(e)=>setAddProduct({...addProduct,product_image : e.target.files})} placeholder="product image"  className="input input-bordered input-info max-w-xs mb-2"/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
@@ -96,7 +116,7 @@ const AddProducts = () => {
                                     Location
                                 </span>
                             </label>
-                            <input onBlur={handleInputBlur} type="text" name="location" placeholder="location" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="text" name="location" onBlur={(e)=>setAddProduct({...addProduct,location : e.target.value})} placeholder="location" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
@@ -104,7 +124,7 @@ const AddProducts = () => {
                                     Resale price
                                 </span>
                             </label>
-                            <input onBlur={handleInputBlur} type="number" name="resale_price" placeholder="Resale price" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="number" name="resale_price" onBlur={(e)=>setAddProduct({...addProduct,resale_price : e.target.value})} placeholder="Resale price" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
@@ -112,7 +132,7 @@ const AddProducts = () => {
                                     Original price
                                 </span>
                             </label>
-                            <input onBlur={handleInputBlur} type="number" name="original_price" placeholder="Original price" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="number" name="original_price" onBlur={(e)=>setAddProduct({...addProduct,original_price : e.target.value})} placeholder="Original price" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
@@ -120,7 +140,7 @@ const AddProducts = () => {
                                     Years of use
                                 </span>
                             </label>
-                            <input onBlur={handleInputBlur} type="number" name="usage" placeholder="Years of use" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="number" name="usage" onBlur={(e)=>setAddProduct({...addProduct,usage : e.target.value})} placeholder="Years of use" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                         <div className='form-control'>
                             <label className="label">
@@ -128,7 +148,7 @@ const AddProducts = () => {
                                     Phone number
                                 </span>
                             </label>
-                            <input onBlur={handleInputBlur} type="number" name="contact" placeholder="017 --------" className="input input-bordered input-info max-w-xs mb-2" required/>
+                            <input type="number" name="contact" onBlur={(e)=>setAddProduct({...addProduct,contact : e.target.value})} placeholder="017 --------" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                     <div className='form-control'>
                         <button className="btn btn-active btn-secondary">
