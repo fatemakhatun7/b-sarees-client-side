@@ -48,7 +48,7 @@ const Navbar = () => {
                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/'>Home</Link></li>
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/blogs'>Blogs</Link></li>
-                    <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/services'>Categories</Link></li>
+                    <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/categories'>Categories</Link></li>
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/report'>Report an issue</Link></li>
                 </ul>
                 </div>

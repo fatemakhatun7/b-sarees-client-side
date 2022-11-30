@@ -6,8 +6,9 @@ import { AuthContext } from '../../../Contexts/Authprovider';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
+    const { user, createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
     const [error, setError] = useState('')
+
     const handleSignUp = (data) => {
         console.log(data);
         setError('');
@@ -15,6 +16,20 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+
+                const sareeUser = {
+                    userEmail : user.email,
+                    role : data.role
+                }
+
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(sareeUser)
+                })
+                
                 toast('You have joined us Successfully.')
                 const userInfo = {
                     displayName: data.name
@@ -26,8 +41,8 @@ const SignUp = () => {
             .catch(error => {
                 console.log(error)
                 setError(error.message)
-            });
-    }
+            }); 
+    } 
 
     const handleGoogleSignin = () => {
         signInWithGoogle().then(result => {
@@ -35,7 +50,7 @@ const SignUp = () => {
           toast.success('You have successfully created your account.');
         })
       }
-
+console.log(user);
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7 bg-lime-200 rounded-lg'>
@@ -69,18 +84,15 @@ const SignUp = () => {
                         {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                     </div>
                     <h1 className='mt-5 font-bold text-lg mb-3'>Join us as-</h1>
-                    <div className='flex'>
-                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
-                        <div className='text-lg font-semibold'>
-                        seller
-                        </div>
-                    </div>
-                    <div className='flex'>
-                        <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
-                        <div className='text-lg font-semibold'>
-                        user
-                        </div>
-                    </div>
+                    <div className="flex gap-2 flex-col my-4">
+                <label htmlFor="default-radio-1" className="ml-2 text-lg font-medium text-gray-900 ">
+                    <input {...register("role")} id="default-radio-1" defaultChecked type="radio" value="buyer" className="w-4 h-4bg-gray-100 border-gray-300  " />
+                    Buyer</label>
+                    
+                    <label htmlFor="default-radio-2" className="ml-2 text-lg font-medium text-gray-900 ">
+                    <input {...register("role")} id="default-radio-2" type="radio" value="seller" className="w-4 h-4bg-gray-100 border-gray-300 " />
+                    Seller</label>
+                </div>
                     <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
                     {error && <p className='text-red-600'>{error}</p>}
                 </form>

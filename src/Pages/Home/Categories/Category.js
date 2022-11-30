@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Category = ({cate}) => {
     const {name, Description , img} = cate;
@@ -14,7 +15,7 @@ const Category = ({cate}) => {
                 <p>{Description}</p>
             </div>
             <div className='text-center mb-3'>
-                <button className="btn">See more</button>
+                <Link to='/categories' className="btn">See more</Link>
             </div>
         </div>
     );
