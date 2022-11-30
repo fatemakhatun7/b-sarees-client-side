@@ -7,7 +7,7 @@ import SignIn from "../../JoinUs/SignIn/SignIn";
 import SignUp from "../../JoinUs/SignUp/SignUp";
 import AddProducts from "../../Products/AddProducts";
 import Product from "../../Products/Product";
-import Products from "../../Products/Products";
+import ProductLayout from "../../../Layout/ProductLayout";
 
 const router = createBrowserRouter([
     {
@@ -37,12 +37,12 @@ const router = createBrowserRouter([
         },
         {
           path: '/categories',
-          element: <Products></Products>,
+          element: <ProductLayout></ProductLayout>,
           children: [
             {
               path: '/categories/:name',
               element: <Product></Product>,
-              loader: ({params})=> fetch(`http://localhost:5000/categories/${params.name}`)
+              loader: ({params})=> fetch(`http://localhost:5000/addProducts?name=${params.name}`)
             }
           ]
         }

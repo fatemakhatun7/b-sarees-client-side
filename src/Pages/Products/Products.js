@@ -20,6 +20,10 @@ const Products = () => {
     
     return (
         <div>
+        <div className='text-center my-20'>
+            <h2 className='text-2xl font-bold mb-2'>Do you want to add more products?</h2>
+            <Link to='/addProduct' className="btn">Add Product</Link>
+        </div>
             <h2 className='ml-20 my-10 font-bold text-xl'>Products categories</h2>
             <div className='flex justify-around my-10'>
                 {
@@ -32,16 +36,11 @@ const Products = () => {
                             <h2 className="card-title">{product.cate_name}</h2>
                         </div>
                         <div className='text-center mb-3'>
-                            <Link className="btn">See more</Link>
+                            <Link to={`/categories/${product.cate_name}`} className="btn">See more</Link>
                         </div>
                     </div>  )
                 }
             </div>
-            <div className='text-center mb-3'>
-                <h2 className='text-2xl font-bold mb-2'>Do you want to add more products?</h2>
-                <Link to='/addProduct' className="btn">Add Product</Link>
-            </div>
-            <Outlet></Outlet>
         </div>
     );
 };

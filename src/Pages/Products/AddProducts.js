@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
 import Loader from '../Shared/Loader/Loader';
 
 const AddProducts = () => {
     const {user} = useContext(AuthContext);
     const [addProduct, setAddProduct] = useState({});
+
+    const navigate = useNavigate();
 
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -20,9 +22,18 @@ const AddProducts = () => {
         }
     });
 
+    const postTime = new Date().toLocaleTimeString()
+    const postDay = new Date().toDateString()
+    const date = new Date()
+    const postDateInfo ={
+        postTime,
+        postDay,
+        date
+    }
+
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(addProduct);
+        // console.log(addProduct);
 
         const image = addProduct.product_image[0];
         // console.log(image)
@@ -38,13 +49,14 @@ const AddProducts = () => {
             // console.log(imgData.data.url)
             const productInfo = {
                 seller_name: addProduct.seller_name,
-                product_name: addProduct.product_name, 
+                cat_name: addProduct.product_name, 
                 email: addProduct.email,
                 product_image: imgData.data.url,
                 location: addProduct.location,
                 resale_price: addProduct.resale_price,
                 original_price: addProduct.original_price,
                 usage: addProduct.usage,
+                postDateInfo: postDateInfo,
                 contact: addProduct.contact
             }
             
@@ -60,6 +72,7 @@ const AddProducts = () => {
             if(data.acknowledged){
                 toast.success('Successfully added your product.');
                 e.target.reset();
+                navigate('/categories')
             }
         })
 
