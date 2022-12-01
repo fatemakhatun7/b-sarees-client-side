@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {toast} from 'react-hot-toast';
+import { AuthContext } from '../../Contexts/Authprovider';
 
 const ProductCard = ({product}) => {
+    const {user} = useContext(AuthContext);
 
     const {
         cat_name, 
@@ -18,6 +20,28 @@ const ProductCard = ({product}) => {
         usage,
         _id
     } = product;
+
+    const handleWishlist = () =>{
+
+        const wishlists = {
+            buyer_name : user.displayName,
+            buyer_email: user.email,
+            product_price: product.resale_price,
+            product_image: product.product_image,
+            seller_name: product.seller_name,
+            location: product.location,
+            contact: product.contact
+        }
+
+        fetch('http://localhost:5000/wishlists', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishlists)
+        })
+        toast.success('product added to the wishlist successfully.')
+    }
 
     return (
         <div>
@@ -43,7 +67,7 @@ const ProductCard = ({product}) => {
                 <div className='flex justify-around mb-3'>
                     <Link 
                     onClick={
-                        ()=>{toast.success('product added to the wishlist successfully')}
+                        handleWishlist
                     }
                     className='btn'>
                         <FaHeart></FaHeart>

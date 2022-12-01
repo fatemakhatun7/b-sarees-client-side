@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const MyProductCard = ({myProduct}) => {
@@ -16,6 +17,27 @@ const MyProductCard = ({myProduct}) => {
         usage,
         _id
     } = myProduct;
+
+    const handleAdvertise = () =>{
+        const advertise = {
+            buyer_name : user.displayName,
+            buyer_email: user.email,
+            product_price: product.resale_price,
+            product_image: product.product_image,
+            seller_name: product.seller_name,
+            location: product.location,
+            contact: product.contact
+        }
+
+        fetch('http://localhost:5000/wishlists', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(advertise)
+        })
+        toast.success('product added to the wishlist successfully.')
+    }
 
     return (
         <div>
@@ -39,6 +61,8 @@ const MyProductCard = ({myProduct}) => {
                     <p>Email: {email}</p>
                 </div>
                 <div className='flex justify-around mb-3'>
+                    <Link 
+                    onClick={handleAdvertise} className="btn">advertise</Link>
                     <Link className="btn">delete</Link>
                 </div>
             </div>
