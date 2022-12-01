@@ -1,25 +1,32 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/Authprovider';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user, createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
     const [error, setError] = useState('')
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignUp = (data) => {
         console.log(data);
         setError('');
+
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                
 
                 const sareeUser = {
                     userEmail : user.email,
-                    role : data.role
+                    role : data.role,
+                    displayName: data.name
                 }
 
                 fetch('http://localhost:5000/users', {
@@ -31,6 +38,8 @@ const SignUp = () => {
                 })
                 
                 toast('You have joined us Successfully.')
+                navigate(from, {replace: true});
+
                 const userInfo = {
                     displayName: data.name
                 }

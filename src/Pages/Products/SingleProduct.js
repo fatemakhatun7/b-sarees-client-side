@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
-const ProductCard = ({product}) => {
+const SingleProduct = () => {
+    const singleProduct = useLoaderData();
+    console.log(singleProduct);
 
     const {
         cat_name, 
@@ -15,18 +17,18 @@ const ProductCard = ({product}) => {
         seller_name,
         usage,
         _id
-    } = product;
+    } = singleProduct;
 
     return (
-        <div>
-            <div className="card bg-base-100 shadow-xl">
+        <div className='flex justify-center my-10'>
+            <div className="card card-compact w-96 bg-base-100 shadow-xl">
                 <figure className="px-10 pt-10">
                     <img src={product_image} alt="saree" className="rounded-xl h-44 hover:scale-125 transition-all duration-500 cursor-pointer" />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{cat_name}</h2>
                 </div>
-                <div className='px-3 pb-5'>
+                <div className='card-body px-3 pb-5'>
                     <p>Seller: {seller_name}</p>
                     <p className='font-bold'>Resale price: ${resale_price}</p>
                     <p>Original price: ${original_price}</p>
@@ -39,11 +41,11 @@ const ProductCard = ({product}) => {
                     <p>Email: {email}</p>
                 </div>
                 <div className='text-center mb-3'>
-                    <Link to={`/addProducts/${_id}`}className="btn">Book Now</Link>
+                    <Link className="btn">Book Now</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ProductCard;
+export default SingleProduct;

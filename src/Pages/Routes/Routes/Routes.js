@@ -8,6 +8,9 @@ import SignUp from "../../JoinUs/SignUp/SignUp";
 import AddProducts from "../../Products/AddProducts";
 import Product from "../../Products/Product";
 import ProductLayout from "../../../Layout/ProductLayout";
+import SingleProduct from "../../Products/SingleProduct";
+import AllSeller from "../../AllSeller/AllSeller";
+import AllBuyer from "../../AllBuyer/AllBuyer";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +39,16 @@ const router = createBrowserRouter([
           element: <AddProducts></AddProducts>
         },
         {
+          path: '/allSeller/:role',
+          element: <AllSeller></AllSeller>,
+          loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+        },
+        {
+          path: '/allBuyer/:role',
+          element: <AllBuyer></AllBuyer>,
+          loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+        },
+        {
           path: '/categories',
           element: <ProductLayout></ProductLayout>,
           children: [
@@ -45,6 +58,11 @@ const router = createBrowserRouter([
               loader: ({params})=> fetch(`http://localhost:5000/addProducts?name=${params.name}`)
             }
           ]
+        },
+        {
+          path: '/addProducts/:id',
+          element: <SingleProduct></SingleProduct>,
+          loader: ({params})=> fetch(`http://localhost:5000/addProducts/${params.id}`)
         }
         ]
     }
