@@ -1,9 +1,7 @@
 import React from 'react';
-import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import {toast} from 'react-hot-toast';
 
-const ProductCard = ({product}) => {
+const MyProductCard = ({myProduct}) => {
 
     const {
         cat_name, 
@@ -17,7 +15,7 @@ const ProductCard = ({product}) => {
         seller_name,
         usage,
         _id
-    } = product;
+    } = myProduct;
 
     return (
         <div>
@@ -41,18 +39,11 @@ const ProductCard = ({product}) => {
                     <p>Email: {email}</p>
                 </div>
                 <div className='flex justify-around mb-3'>
-                    <Link 
-                    onClick={
-                        ()=>{toast.success('product added to the wishlist successfully')}
-                    }
-                    className='btn'>
-                        <FaHeart></FaHeart>
-                    </Link>
-                    <Link to={`/addProducts/${_id}`}className="btn">Book Now</Link>
+                    <Link className="btn">delete</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ProductCard;
+export default MyProductCard;

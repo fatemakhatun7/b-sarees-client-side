@@ -11,6 +11,7 @@ import ProductLayout from "../../../Layout/ProductLayout";
 import SingleProduct from "../../Products/SingleProduct";
 import AllSeller from "../../AllSeller/AllSeller";
 import AllBuyer from "../../AllBuyer/AllBuyer";
+import MyProducts from "../../MyProducts/MyProducts";
 
 const router = createBrowserRouter([
     {
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
           path: '/addProducts/:id',
           element: <SingleProduct></SingleProduct>,
           loader: ({params})=> fetch(`http://localhost:5000/addProducts/${params.id}`)
+        },
+        {
+          path: '/myProducts/:email',
+          element: <MyProducts></MyProducts>,
+          loader: ({params})=> fetch(`http://localhost:5000/addProducts?email=${params.email}`)
         }
         ]
     }

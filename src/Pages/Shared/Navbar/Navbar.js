@@ -21,6 +21,8 @@ const Navbar = () => {
                         Dashboard
                         </button>
                         <ul tabIndex={0} className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                            <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><p>{user.displayName}<span className='text-xs'>( {user.email} )</span></p>
+                            </li>
                             <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/dashboard'>Dashboard</Link></li>
                             <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link onClick={handleLogOut}>Sign out</Link></li>
                         </ul>

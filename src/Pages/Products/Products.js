@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Loader from '../Shared/Loader/Loader';
 
 const Products = () => {
