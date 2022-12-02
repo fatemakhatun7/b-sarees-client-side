@@ -4,7 +4,15 @@ This project is all about buying and selling used sarees.
 
 ## Live site link
 
+https://b-sarees.web.app
 
+## Admin details
+
+adminName: Jay
+
+adminEmail: jay@gmail.com
+
+adminPassword: 12AS!@
 
 ### Features and Functionality
 

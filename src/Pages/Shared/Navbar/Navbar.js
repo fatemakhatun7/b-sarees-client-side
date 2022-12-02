@@ -51,7 +51,6 @@ const Navbar = () => {
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/'>Home</Link></li>
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/blogs'>Blogs</Link></li>
                     <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/categories'>Categories</Link></li>
-                    <li className='hover:border-l-4 hover:font-bold border-fuchsia-600'><Link to='/report'>Report an issue</Link></li>
                 </ul>
                 </div>
             </div>
