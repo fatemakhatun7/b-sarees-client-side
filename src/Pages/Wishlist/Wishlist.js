@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import WishlistCard from './WishlistCard';
 
 const Wishlist = () => {
+    useTitle("Wishlist")
     const [wishes, setWishes] = useState([]);
 
     const wishlists = useLoaderData();

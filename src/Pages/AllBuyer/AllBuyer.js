@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const AllBuyer = () => {
     const allBuyers = useLoaderData();
     // console.log(allBuyers);
     const [buyers, setBuyers] = useState([]);
+    useTitle("All buyers")
 
     const handleDelete = id => {
         const proceed = window.confirm('Do you want to delete this review?');

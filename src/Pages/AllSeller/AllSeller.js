@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const AllSeller = () => {
+    useTitle("All Sellers")
     const allSellers = useLoaderData();
     // console.log(allSellers);
     const [sellers, setSellers] = useState([]);

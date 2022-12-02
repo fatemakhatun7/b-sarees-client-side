@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import Loader from '../Shared/Loader/Loader';
 
 const Products = () => {
+    useTitle("Products categories")
     
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],

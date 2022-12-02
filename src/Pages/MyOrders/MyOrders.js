@@ -1,8 +1,10 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 import MyOrdersCard from './MyOrdersCard';
 
 const MyOrders = () => {
+    useTitle("My orders")
     const myOrders = useLoaderData();
     console.log(myOrders);
 

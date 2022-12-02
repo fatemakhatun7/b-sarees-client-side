@@ -3,9 +3,11 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
+import useTitle from '../../hooks/useTitle';
 import Loader from '../Shared/Loader/Loader';
 
 const AddProducts = () => {
+    useTitle("Add products")
     const {user} = useContext(AuthContext);
     const [addProduct, setAddProduct] = useState({});
 

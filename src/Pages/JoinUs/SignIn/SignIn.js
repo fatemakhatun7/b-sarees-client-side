@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/Authprovider';
+import useTitle from '../../../hooks/useTitle';
 
 
 const SignIn = () => {
+    useTitle("Sign in")
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { signIn, signInWithGoogle } = useContext(AuthContext);
