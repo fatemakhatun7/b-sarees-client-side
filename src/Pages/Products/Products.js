@@ -20,12 +20,8 @@ const Products = () => {
     
     return (
         <div>
-        <div className='text-center my-20'>
-            <h2 className='text-2xl font-bold mb-2'>Do you want to add more products?</h2>
-            <Link to='/addProduct' className="btn">Add Product</Link>
-        </div>
             <h2 className='ml-20 my-10 font-bold text-xl'>Products categories</h2>
-            <div className='flex justify-around my-10'>
+            <div className='flex flex-wrap justify-around my-10'>
                 {
                     categories.map(product =>
                         <div className="card bg-base-100 shadow-xl">

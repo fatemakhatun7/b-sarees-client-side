@@ -14,6 +14,8 @@ import AllBuyer from "../../AllBuyer/AllBuyer";
 import MyProducts from "../../MyProducts/MyProducts";
 import Wishlist from "../../Wishlist/Wishlist";
 import MyOrders from "../../MyOrders/MyOrders";
+import DashboardLayout from "../../../Layout/DashboardLayout";
+import AllUsers from "../../AllUsers/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -38,20 +40,6 @@ const router = createBrowserRouter([
           element: <SignIn></SignIn>
         },
         {
-          path: '/addProduct',
-          element: <AddProducts></AddProducts>
-        },
-        {
-          path: '/allSeller/:role',
-          element: <AllSeller></AllSeller>,
-          loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
-        },
-        {
-          path: '/allBuyer/:role',
-          element: <AllBuyer></AllBuyer>,
-          loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
-        },
-        {
           path: '/categories',
           element: <ProductLayout></ProductLayout>,
           children: [
@@ -67,21 +55,45 @@ const router = createBrowserRouter([
           element: <SingleProduct></SingleProduct>,
           loader: ({params})=> fetch(`http://localhost:5000/addProducts/${params.id}`)
         },
-        {
-          path: '/myProducts/:email',
-          element: <MyProducts></MyProducts>,
-          loader: ({params})=> fetch(`http://localhost:5000/addProducts?email=${params.email}`)
-        },
-        {
-          path: '/wishlists/:email',
-          element: <Wishlist></Wishlist>,
-          loader: ({params})=> fetch(`http://localhost:5000/wishlists?email=${params.email}`)
-        },
-        {
-          path: '/myOrders/:email',
-          element: <MyOrders></MyOrders>,
-          loader: ({params})=> fetch(`http://localhost:5000/myOrders?email=${params.email}`)
-        }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: '/dashboard/allusers',
+                element: <AllUsers></AllUsers>
+            },
+            {
+              path: '/dashboard/myOrders/:email',
+              element: <MyOrders></MyOrders>,
+              loader: ({params})=> fetch(`http://localhost:5000/myOrders?email=${params.email}`)
+            },
+            {
+              path: '/dashboard/addProduct',
+              element: <AddProducts></AddProducts>
+            },
+            {
+              path: '/dashboard/myProducts/:email',
+              element: <MyProducts></MyProducts>,
+              loader: ({params})=> fetch(`http://localhost:5000/addProducts?email=${params.email}`)
+            },
+            {
+              path: '/dashboard/wishlists/:email',
+              element: <Wishlist></Wishlist>,
+              loader: ({params})=> fetch(`http://localhost:5000/wishlists?email=${params.email}`)
+            },
+            {
+              path: '/dashboard/allSeller/:role',
+              element: <AllSeller></AllSeller>,
+              loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+            },
+            {
+              path: '/dashboard/allBuyer/:role',
+              element: <AllBuyer></AllBuyer>,
+              loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+            },
         ]
     }
   ]);
