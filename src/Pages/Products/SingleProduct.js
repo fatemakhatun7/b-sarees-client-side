@@ -12,7 +12,8 @@ const SingleProduct = () => {
         cat_name, 
         contact, 
         email, 
-        location, 
+        location,
+        product_image, 
         original_price,
         postDateInfo,
         resale_price,
@@ -23,6 +24,9 @@ const SingleProduct = () => {
     return (
         <div className='flex justify-center my-10'>
             <div className="card card-compact w-96 bg-base-100 shadow-xl">
+                <figure className="px-10 pt-10">
+                    <img src={product_image} alt="saree" className="rounded-xl h-44 hover:scale-125 transition-all duration-500 cursor-pointer" />
+                </figure>
                 <div className="card-body items-center text-center">
                 <div className='card-title'>
                     <h1>Buyer: {user.displayName}</h1>

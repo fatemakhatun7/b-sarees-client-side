@@ -2,8 +2,10 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
-const WishlistCard = ({wishlist}) => {
+const WishlistCard = ({wishlist, handleDelete}) => {
+
     const {
+        _id,
         buyer_name,
         buyer_email,
         product_price,
@@ -29,22 +31,27 @@ const WishlistCard = ({wishlist}) => {
                     <p>Location: {location}</p>
                     <p>Contact: {contact}</p>
                 </div>
-                <div className='text-center mb-3'>
-                    <label htmlFor="my-modal-3" className="btn">Buy</label>
-                    <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-                    <div className="modal">
-                    <div className="modal-box relative">
-                        <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                        <h3 className="text-lg font-bold">Make payment and confirm your purchase!</h3>
-                        <div className='text-center'>
-                            <Link to='/'
-                              onClick={()=>{
-                                toast.success('your payment is completed! we will deliver your product soon. Thank you.')
-                              }}
-                              className="btn btn-sm mt-5">
-                                Make payment</Link>
+                <div className='flex justify-around mb-3'>
+                    <div className='text-center mb-3'>
+                        <label htmlFor="my-modal-3" className="btn">Buy</label>
+                        <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+                        <div className="modal">
+                        <div className="modal-box relative">
+                            <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                            <h3 className="text-lg font-bold">Make payment and confirm your purchase!</h3>
+                            <div className='text-center'>
+                                <Link to='/'
+                                onClick={()=>{
+                                    toast.success('your payment is completed! we will deliver your product soon. Thank you.')
+                                }}
+                                className="btn btn-sm mt-5">
+                                    Make payment</Link>
+                            </div>
+                        </div>
                         </div>
                     </div>
+                    <div>
+                    <Link onClick={() => handleDelete(_id)} className="btn">delete</Link>
                     </div>
                 </div>
             </div>

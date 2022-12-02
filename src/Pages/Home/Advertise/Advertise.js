@@ -16,9 +16,11 @@ const Advertise = () => {
 
     return (
         <div>
-            <div>
-                <h2 className='ml-20 mt-20 mb-5 font-bold text-4xl'>Advertisement</h2>
-            </div>
+            {data.length > 0 ? 
+                <div>
+                    <h2 className='ml-20 mt-20 mb-5 font-bold text-4xl'>Advertisement</h2>
+                </div> : <></>
+            }
             <div className='flex flex-wrap justify-around my-10'>
                 {
                     data.map(advertise => <AdvertiseCard

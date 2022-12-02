@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const AllBuyer = () => {
     const allBuyers = useLoaderData();
-    console.log(allBuyers);
+    // console.log(allBuyers);
+    const [buyers, setBuyers] = useState([]);
+
+    const handleDelete = id => {
+        const proceed = window.confirm('Do you want to delete this review?');
+        if (proceed) {
+            fetch(`http://localhost:5000/users/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.success('deleted successfully');
+                        const remaining = buyers.filter(buyer => buyer._id !== id);
+                        setBuyers(remaining);
+                    }
+                })
+        }
+    }
 
     return (
         <div>
@@ -22,7 +44,7 @@ const AllBuyer = () => {
                                     <Link className="btn btn-xs">Star</Link>
                                 </div>
                                 <div className='text-center mb-3'>
-                                    <Link className="btn btn-xs">block</Link>
+                                    <Link onClick={() => handleDelete(allBuyer._id)} className="btn btn-xs">block</Link>
                                 </div>
                             </div>
                     </div>  )
