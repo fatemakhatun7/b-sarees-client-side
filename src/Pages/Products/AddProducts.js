@@ -164,7 +164,7 @@ const AddProducts = () => {
                             <input type="number" name="contact" onBlur={(e)=>setAddProduct({...addProduct,contact : e.target.value})} placeholder="017 --------" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                     <div className='form-control'>
-                        <Link to={`/myProducts/${user.email}`} className="btn btn-active btn-secondary">
+                        <Link to='/' className="btn btn-active btn-secondary">
                             Submit
                         </Link>
                     </div>

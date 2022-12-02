@@ -77,7 +77,7 @@ const SingleProduct = () => {
                         <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                         <h3 className="text-lg font-bold">Your booking is confirmed!</h3>
                         <div className='text-center'>
-                            <Link to={`/myOrders/${user.email}`}
+                            <Link to='/'
                               onClick={handleMyOrders}
                               className="btn btn-sm mt-5">
                                 Make payment</Link>
