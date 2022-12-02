@@ -13,6 +13,7 @@ import AllSeller from "../../AllSeller/AllSeller";
 import AllBuyer from "../../AllBuyer/AllBuyer";
 import MyProducts from "../../MyProducts/MyProducts";
 import Wishlist from "../../Wishlist/Wishlist";
+import MyOrders from "../../MyOrders/MyOrders";
 
 const router = createBrowserRouter([
     {
@@ -75,6 +76,11 @@ const router = createBrowserRouter([
           path: '/wishlists/:email',
           element: <Wishlist></Wishlist>,
           loader: ({params})=> fetch(`http://localhost:5000/wishlists?email=${params.email}`)
+        },
+        {
+          path: '/myOrders/:email',
+          element: <MyOrders></MyOrders>,
+          loader: ({params})=> fetch(`http://localhost:5000/myOrders?email=${params.email}`)
         }
         ]
     }

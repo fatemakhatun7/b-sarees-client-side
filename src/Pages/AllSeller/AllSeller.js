@@ -6,6 +6,8 @@ const AllSeller = () => {
     const allSellers = useLoaderData();
     // console.log(allSellers);
     const [sellers, setSellers] = useState([]);
+    const [verifyBtn, setVerifyBtn] = useState('Verify');
+    const [adminBtn, setAdminBtn] = useState('Make admin');
 
     const handleDelete = id => {
         const proceed = window.confirm('Do you want to delete this review?');
@@ -41,10 +43,13 @@ const AllSeller = () => {
                             </div>
                             <div className='flex justify-around'>
                                 <div className='text-center mb-3'>
-                                    <Link className="btn btn-xs">Make Admin</Link>
+                                    <Link 
+                                    onClick={()=>setAdminBtn('Admin')} 
+                                    className="btn btn-xs">{adminBtn}</Link>
                                 </div>
                                 <div className='text-center mb-3'>
-                                    <Link className="btn btn-xs">verify</Link>
+                                <Link 
+                                onClick={()=>setVerifyBtn('Verified')} className="btn btn-xs">{verifyBtn}</Link>
                                 </div>
                                 <div className='text-center mb-3'>
                                     <Link onClick={() => handleDelete(allSeller._id)} className="btn btn-xs">block</Link>

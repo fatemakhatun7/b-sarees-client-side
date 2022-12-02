@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
 import Loader from '../Shared/Loader/Loader';
 
@@ -164,9 +164,9 @@ const AddProducts = () => {
                             <input type="number" name="contact" onBlur={(e)=>setAddProduct({...addProduct,contact : e.target.value})} placeholder="017 --------" className="input input-bordered input-info max-w-xs mb-2" required/>
                         </div>
                     <div className='form-control'>
-                        <button className="btn btn-active btn-secondary">
+                        <Link to={`/myProducts/${user.email}`} className="btn btn-active btn-secondary">
                             Submit
-                        </button>
+                        </Link>
                     </div>
                     </Form>
                 </div>

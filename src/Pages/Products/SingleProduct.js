@@ -21,6 +21,25 @@ const SingleProduct = () => {
         usage
     } = singleProduct;
 
+    const handleMyOrders = () =>{
+
+        const myOrders = {
+            buyer_name : user.displayName,
+            buyer_email: user.email,
+            product_price: singleProduct.resale_price,
+            product_image: singleProduct.product_image,
+        }
+
+        fetch('http://localhost:5000/myOrders', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(myOrders)
+        })
+        toast.success('your payment is completed! we will deliver your product soon. Thank you.')
+    }
+
     return (
         <div className='flex justify-center my-10'>
             <div className="card card-compact w-96 bg-base-100 shadow-xl">
@@ -58,10 +77,8 @@ const SingleProduct = () => {
                         <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                         <h3 className="text-lg font-bold">Your booking is confirmed!</h3>
                         <div className='text-center'>
-                            <Link to='/'
-                              onClick={()=>{
-                                toast.success('your payment is completed! we will deliver your product soon. Thank you.')
-                              }}
+                            <Link to={`/myOrders/${user.email}`}
+                              onClick={handleMyOrders}
                               className="btn btn-sm mt-5">
                                 Make payment</Link>
                         </div>

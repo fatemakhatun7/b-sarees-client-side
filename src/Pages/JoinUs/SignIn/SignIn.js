@@ -67,13 +67,13 @@ const SignIn = () => {
                     <div className='flex'>
                         <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
                         <div className='text-lg font-semibold'>
-                        seller
+                        Seller
                         </div>
                     </div>
                     <div className='flex mb-5'>
                         <input type="radio" name="radio-2" className="radio radio-primary mx-3" />
                         <div className='text-lg font-semibold'>
-                        user
+                        Buyer
                         </div>
                     </div>
                     <input className='btn btn-accent w-full' value="Login" type="submit" />
