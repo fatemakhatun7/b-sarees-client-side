@@ -24,7 +24,7 @@ const MyProductCard = ({myProduct}) => {
             product_image: myProduct.product_image
         }
 
-        fetch('http://localhost:5000/advertise', {
+        fetch('https://b-sarees-server.vercel.app/advertise', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

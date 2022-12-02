@@ -33,7 +33,7 @@ const ProductCard = ({product}) => {
             contact: product.contact
         }
 
-        fetch('http://localhost:5000/wishlists', {
+        fetch('https://b-sarees-server.vercel.app/wishlists', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

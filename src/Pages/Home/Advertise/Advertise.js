@@ -9,7 +9,7 @@ const Advertise = () => {
 
     useEffect(() => {
         axios
-        .get("http://localhost:5000/advertise")
+        .get("https://b-sarees-server.vercel.app/advertise")
         .then((response) => setData(response.data))
         .catch((error) => setIsError(error.message));
     }, []);console.log(data);

@@ -8,7 +8,7 @@ const Categories = () => {
 
     useEffect(() => {
         axios
-        .get("http://localhost:5000/categories")
+        .get("https://b-sarees-server.vercel.app/categories")
         .then((response) => setData(response.data))
         .catch((error) => setIsError(error.message));
     }, []);

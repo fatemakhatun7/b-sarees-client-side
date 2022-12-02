@@ -29,7 +29,7 @@ const SignUp = () => {
                     displayName: data.name
                 }
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://b-sarees-server.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

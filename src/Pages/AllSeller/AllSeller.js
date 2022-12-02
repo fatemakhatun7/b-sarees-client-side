@@ -10,7 +10,7 @@ const AllSeller = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Do you want to delete this review?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/${id}`, {
+            fetch(`https://b-sarees-server.vercel.app/users/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'

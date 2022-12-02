@@ -30,7 +30,7 @@ const SingleProduct = () => {
             product_image: singleProduct.product_image,
         }
 
-        fetch('http://localhost:5000/myOrders', {
+        fetch('https://b-sarees-server.vercel.app/myOrders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

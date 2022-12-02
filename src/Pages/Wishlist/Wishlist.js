@@ -11,7 +11,7 @@ const Wishlist = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Do you want to delete this review?');
         if (proceed) {
-            fetch(`http://localhost:5000/wishlists/${id}`, {
+            fetch(`https://b-sarees-server.vercel.app/wishlists/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json'

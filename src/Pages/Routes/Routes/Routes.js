@@ -50,14 +50,14 @@ const router = createBrowserRouter([
             {
               path: '/categories/:name',
               element: <PrivateRoute><Product></Product></PrivateRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/addProducts?name=${params.name}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/addProducts?name=${params.name}`)
             }
           ]
         },
         {
           path: '/addProducts/:id',
           element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>,
-          loader: ({params})=> fetch(`http://localhost:5000/addProducts/${params.id}`)
+          loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/addProducts/${params.id}`)
         },
         ]
     },
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
             {
               path: '/dashboard/myOrders/:email',
               element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/myOrders?email=${params.email}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/myOrders?email=${params.email}`)
             },
             {
               path: '/dashboard/addProduct',
@@ -81,22 +81,22 @@ const router = createBrowserRouter([
             {
               path: '/dashboard/myProducts/:email',
               element: <SellerRoute><MyProducts></MyProducts></SellerRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/addProducts?email=${params.email}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/addProducts?email=${params.email}`)
             },
             {
               path: '/dashboard/wishlists/:email',
               element: <BuyerRoute><Wishlist></Wishlist></BuyerRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/wishlists?email=${params.email}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/wishlists?email=${params.email}`)
             },
             {
               path: '/dashboard/allSeller/:role',
               element: <AdminRoute><AllSeller></AllSeller></AdminRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/users?role=${params.role}`)
             },
             {
               path: '/dashboard/allBuyer/:role',
               element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>,
-              loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
+              loader: ({params})=> fetch(`https://b-sarees-server.vercel.app/users?role=${params.role}`)
             }
         ]
     }
