@@ -12,21 +12,18 @@ const AllUsers = () => {
         }
     });
 
-    /* const handleMakeAdmin = id => {
+    const handleMakeAdmin = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
-            method: 'PUT', 
-            headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+            method: 'PUT'
         })
         .then(res => res.json())
         .then(data => {
             if(data.modifiedCount > 0){
-                toast.success('Make admin successful.')
+                toast.success('Successfully added an Admin.')
                 refetch();
             }
         })
-    } */
+    }
 
     return (
         <div>
@@ -47,7 +44,7 @@ const AllUsers = () => {
                         <th>{i+1}</th>
                         <td>{user.displayName}</td>
                         <td>{user.userEmail}</td>
-                        <td>{ user?.role !== 'admin' && <button /* onClick={() => handleMakeAdmin(user._id)} */ className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                        <td>{ user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                     </tr>)
                 }
                 

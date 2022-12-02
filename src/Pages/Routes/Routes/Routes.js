@@ -16,6 +16,10 @@ import Wishlist from "../../Wishlist/Wishlist";
 import MyOrders from "../../MyOrders/MyOrders";
 import DashboardLayout from "../../../Layout/DashboardLayout";
 import AllUsers from "../../AllUsers/AllUsers";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerRoute from "../SellerRoute/SelllerRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 
 const router = createBrowserRouter([
     {
@@ -41,59 +45,59 @@ const router = createBrowserRouter([
         },
         {
           path: '/categories',
-          element: <ProductLayout></ProductLayout>,
+          element: <PrivateRoute><ProductLayout></ProductLayout></PrivateRoute>,
           children: [
             {
               path: '/categories/:name',
-              element: <Product></Product>,
+              element: <PrivateRoute><Product></Product></PrivateRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/addProducts?name=${params.name}`)
             }
           ]
         },
         {
           path: '/addProducts/:id',
-          element: <SingleProduct></SingleProduct>,
+          element: <PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>,
           loader: ({params})=> fetch(`http://localhost:5000/addProducts/${params.id}`)
         },
         ]
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard/allusers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
               path: '/dashboard/myOrders/:email',
-              element: <MyOrders></MyOrders>,
+              element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/myOrders?email=${params.email}`)
             },
             {
               path: '/dashboard/addProduct',
-              element: <AddProducts></AddProducts>
+              element: <SellerRoute><AddProducts></AddProducts></SellerRoute>
             },
             {
               path: '/dashboard/myProducts/:email',
-              element: <MyProducts></MyProducts>,
+              element: <SellerRoute><MyProducts></MyProducts></SellerRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/addProducts?email=${params.email}`)
             },
             {
               path: '/dashboard/wishlists/:email',
-              element: <Wishlist></Wishlist>,
+              element: <BuyerRoute><Wishlist></Wishlist></BuyerRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/wishlists?email=${params.email}`)
             },
             {
               path: '/dashboard/allSeller/:role',
-              element: <AllSeller></AllSeller>,
+              element: <AdminRoute><AllSeller></AllSeller></AdminRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
             },
             {
               path: '/dashboard/allBuyer/:role',
-              element: <AllBuyer></AllBuyer>,
+              element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>,
               loader: ({params})=> fetch(`http://localhost:5000/users?role=${params.role}`)
-            },
+            }
         ]
     }
   ]);
